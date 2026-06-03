@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src https://courthive.net; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'self'"
+    />
+    <title>CourtHive Draw Viewer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="page-nav" aria-label="Page navigation">
+        <a href="./index.html">Match finder</a>
+        <span aria-current="page">Draw viewer</span>
+        <a href="./date.html">Date matches</a>
+      </nav>
+
+      <section class="query-panel" aria-labelledby="page-title">
+        <div class="masthead">
+          <p class="eyebrow">CourtHive public API</p>
+          <h1 id="page-title">Draw viewer</h1>
+          <p class="summary">Select a tournament event and participant, then display that participant's draw path with opponent, status, score, and schedule details.</p>
+        </div>
+
+        <form id="draw-form" class="form-grid">
+          <label>
+            <span>Tournament ID</span>
+            <input
+              id="tournament-id"
+              name="tournamentId"
+              type="text"
+              autocomplete="off"
+              value="d753a6b4-6592-4d9f-b226-2ab0d2f75106"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Event type</span>
+            <select id="event-select" name="eventId" required disabled></select>
+          </label>
+
+          <label>
+            <span>Player name</span>
+            <div class="input-with-action">
+              <input id="player-name" name="playerName" type="search" autocomplete="off" required />
+              <button id="open-player-lookup" class="secondary-button" type="button">Lookup</button>
+            </div>
+          </label>
+
+          <button id="submit-button" type="submit">Display draw</button>
+        </form>
+      </section>
+
+      <section class="status-band" aria-live="polite">
+        <div>
+          <span class="status-label">Status</span>
+          <p id="status-text">Loading tournament events.</p>
+        </div>
+        <div class="resolved">
+          <span class="status-label">Resolved participant</span>
+          <p id="resolved-text">-</p>
+        </div>
+      </section>
+
+      <section class="results-panel">
+        <div class="results-heading">
+          <h2>Draw path</h2>
+          <span id="result-count">0 matches</span>
+        </div>
+        <div id="empty-state" class="empty-state">Run a search to see the participant's draw.</div>
+        <div id="results-body" class="event-results" hidden></div>
+      </section>
+
+      <footer class="site-notice">
+        <strong>Unofficial viewer.</strong>
+        Data is requested from CourtHive public endpoints in your browser. This page does not store searches or results.
+      </footer>
+    </main>
+
+    <dialog id="player-dialog" class="player-dialog">
+      <div class="dialog-card">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Published participants</p>
+            <h2>Player lookup</h2>
+          </div>
+          <button id="close-player-dialog" class="icon-button" type="button" aria-label="Close player lookup">×</button>
+        </div>
+        <label>
+          <span>Search player</span>
+          <input id="player-lookup-query" type="search" autocomplete="off" placeholder="Type a name or pair" />
+        </label>
+        <p id="player-lookup-status" class="lookup-status">Enter a tournament ID, then open lookup.</p>
+        <div id="player-lookup-results" class="lookup-results"></div>
+      </div>
+    </dialog>
+
+    <script src="./draw.js?v=20260527-draw-viewer"></script>
+  </body>
+</html>

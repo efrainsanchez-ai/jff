@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src https://courthive.net; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'self'"
+    />
+    <title>CourtHive Date Matches</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="page-nav" aria-label="Page navigation">
+        <a href="./index.html">Match finder</a>
+        <a href="./draw.html">Draw viewer</a>
+        <span aria-current="page">Date matches</span>
+      </nav>
+
+      <section class="query-panel" aria-labelledby="page-title">
+        <div class="masthead">
+          <p class="eyebrow">CourtHive public API</p>
+          <h1 id="page-title">Date matches</h1>
+          <p class="summary">Choose a tournament and scheduled date, then list every published matchup for that day.</p>
+        </div>
+
+        <form id="date-form" class="form-grid">
+          <label>
+            <span>Tournament ID</span>
+            <input
+              id="tournament-id"
+              name="tournamentId"
+              type="text"
+              autocomplete="off"
+              value="d753a6b4-6592-4d9f-b226-2ab0d2f75106"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Scheduled date</span>
+            <input id="scheduled-date" name="scheduledDate" type="date" required />
+          </label>
+
+          <button id="submit-button" type="submit">Show matches</button>
+        </form>
+      </section>
+
+      <section class="status-band" aria-live="polite">
+        <div>
+          <span class="status-label">Status</span>
+          <p id="status-text">Ready.</p>
+        </div>
+        <div class="resolved">
+          <span class="status-label">Selected date</span>
+          <p id="selected-date-text">-</p>
+        </div>
+      </section>
+
+      <section class="results-panel">
+        <div class="results-heading">
+          <div>
+            <h2 id="results-title">Court schedule</h2>
+            <span id="result-count">0 matches</span>
+          </div>
+          <fieldset class="view-toggle" aria-label="View mode">
+            <label>
+              <input type="radio" name="viewMode" value="courts" checked />
+              <span>Courts</span>
+            </label>
+            <label>
+              <input type="radio" name="viewMode" value="events" />
+              <span>Events</span>
+            </label>
+          </fieldset>
+        </div>
+        <div id="empty-state" class="empty-state">Choose a date to see matchups.</div>
+        <div id="results-body" class="event-results" hidden></div>
+      </section>
+
+      <footer class="site-notice">
+        <strong>Unofficial viewer.</strong>
+        Data is requested from CourtHive public endpoints in your browser. This page does not store searches or results.
+      </footer>
+    </main>
+
+    <script src="./date.js?v=20260527-court-grid"></script>
+  </body>
+</html>
